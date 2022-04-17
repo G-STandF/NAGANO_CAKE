@@ -1,49 +1,44 @@
 Rails.application.routes.draw do
-  namespace :customer do
-    get 'adresses/index'
-    get 'adresses/edit'
+# 顧客用
+# URL /customers/sign_in ...
+devise_for :customers,skip: [:passwords], controllers: {
+ registrations: "customer/registrations",
+ sessions: 'customer/sessions'
+}
+# 管理者用
+# URL /admin/sign_in ...
+devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+ sessions: "admin/sessions"
+}
+namespace :admin do
+  resources :genres, only: [:index, :create, :edit, :update]
+  resources :puroducts, only: [:new, :index, :create, :show, :edit, :update]
+  resources :orders, only: [:show, :update, :index]
+  resources :order_items, only: [:update]
+  resources :customers, only: [:index, :show, :edit, :update]
+ end
+ scope module: "customer" do
+  root to: 'products#top'
+  get 'about' => 'products#about', as: 'about'
+  #get "/sign_out" => "sessions#destroy" #要相談
+  get "/customers/my_page" => "customers#show" #会員情報詳細ページ（マイページ）表示
+  get "/customers/confirm" => "customers#confirm" #退会確認画面の表示
+  patch "/customers/out" => "customers#out" #退会フラグを切り替える
+  get "/orders/thanks" => "orders#thanks" #注文完了画面を表示する
+  post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
+  resources :products, only: [:index,:show]
+  resources :customers, only: [:edit,:update]
+  resources :cart_items, only: [:index,:update,:destroy,:create] do
+   collection do #:idをつけないように!!
+    delete :destroy_all #カートを空にする
+   end
   end
-  namespace :customer do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/thanks'
-    get 'orders/index'
-    get 'orders/show'
+  resources :orders, only: [:index,:show,:new,:create,] do
+   collection do
+    get :thanks
+   end
   end
-  namespace :customer do
-    get 'cart_items/index'
-  end
-  namespace :customer do
-    get 'products/top'
-    get 'products/about'
-    get 'products/index'
-    get 'products/show'
-  end
-  namespace :customer do
-    get 'customers/show'
-    get 'customers/confirm'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'products/index'
-    get 'products/new'
-    get 'products/show'
-    get 'products/edit'
-  end
-  devise_for :admins
-  devise_for :customers
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :addresses, only: [:index,:create,:destroy,:edit,:update]
+ end
+# ここまで↑↑ 会員
 end
