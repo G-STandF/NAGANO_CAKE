@@ -12,7 +12,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 }
 namespace :admin do
   resources :genres, only: [:index, :create, :edit, :update]
-  resources :puroducts, only: [:new, :index, :create, :show, :edit, :update]
+  resources :products, only: [:new, :index, :create, :show, :edit, :update]
   resources :orders, only: [:show, :update, :index]
   resources :order_items, only: [:update]
   resources :customers, only: [:index, :show, :edit, :update]
