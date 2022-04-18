@@ -1,6 +1,6 @@
 <h1>商品一覧</h1>
 
-<div><%= link_to "+", new_admin_product_path %></div>
+<div><%= link_to "商品新規登録", new_admin_product_path %></div>
 
 <table>
   <thead>
@@ -20,7 +20,7 @@
         <%= link_to product.name, admin_product_path(product.id) %>
       </td>
       <td><%= product.price %></td>
-      <td><%= product.genre_id %></td>
+      <td><%= product.genre.name %></td>
       <td>
         <% if product.is_sales == true %>
           販売中
