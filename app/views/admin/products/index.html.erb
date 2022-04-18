@@ -12,7 +12,7 @@
       <th>ステータス</th>
     </tr>
   </thead>
-  <% @products.each do |item| %>
+  <% @products.each do |product| %>
   <tbody>
     <tr>
       <td><%= product.id %></td>
@@ -21,7 +21,13 @@
       </td>
       <td><%= product.price %></td>
       <td><%= product.genre_id %></td>
-      <td><%= product.is_sale %></td>
+      <td>
+        <% if product.is_sales == true %>
+          販売中
+        <%else%>
+        　販売停止中
+        <%end%>
+      </td>
     </tr>
   </tbody>
   <%end%>
