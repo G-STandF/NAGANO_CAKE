@@ -3,19 +3,18 @@ class Customer::AddressesController < ApplicationController
 
   def index
     @address = Address.new
-    # @addresses = current_customer.addresses
+    @addresses = current_customer.addresses
   end
-  
+
   def create
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
     if @address.save
       flash[:notice] = "配送先を登録しました。"
-      redirect_to request.referer
+      redirect_to addresses_path
     else
       flash.now[:alert] = "配送先を入力してください。"
-      @customer = current_customer
-      @addresses = @customer.addresses
+      @addresses = current_customer.addresses
       render 'index'
     end
   end
@@ -23,7 +22,7 @@ class Customer::AddressesController < ApplicationController
   def edit
     @address = Address.find(params[:id])
   end
-  
+
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
@@ -42,11 +41,10 @@ class Customer::AddressesController < ApplicationController
     redirect_to request.referer
   end
 
-  
+
   private
 
   def address_params
     params.require(:address).permit(:name, :postal_code, :address)
-
   end
 end
