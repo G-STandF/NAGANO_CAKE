@@ -7,11 +7,11 @@ class Customer::ProductsController < ApplicationController
   end
 
   def index
-    @product_count = Product.count
-    @products = Product.page(params[:page])
+    @products = Product.where(is_sales: true).page(params[:page])
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   private
