@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 # 顧客用
 # URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {
@@ -27,6 +28,7 @@ namespace :admin do
   get "/orders/thanks" => "orders#thanks" #注文完了画面を表示する
   post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
   resources :products, only: [:index,:show]
+  resources :genres, only: [:index]
   resources :customers, only: [:edit,:update]
   resources :cart_items, only: [:index,:update,:destroy,:create] do
    collection do #:idをつけないように!!

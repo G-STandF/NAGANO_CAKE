@@ -8,6 +8,7 @@ class Customer::ProductsController < ApplicationController
 
   def index
     @products = Product.where(is_sales: true).page(params[:page])
+    @genres = Genre.all
   end
 
   def show
