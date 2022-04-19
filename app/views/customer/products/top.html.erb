@@ -1,2 +1,29 @@
-<h1>Customer::Products#top</h1>
-<p>Find me in app/views/customer/products/top.html.erb</p>
+<div>
+  <p>
+    ようこそながのCAKEへ！
+    <br>このサイトは、ケーキ販売のECサイトになります。
+    <br>会員でない方も商品の閲覧はできますが、
+    <br>購入には会員登録が必要になります。
+  </p>
+</div>
+
+<!-- product preview -->
+<div>
+  <h3>新着商品</h3>
+  <div class="wrapper grid">
+    <% @products.each do |product| %>
+    <% if product.is_sales == true %>
+      <%= link_to product_path(product) do %>
+        <div><%= image_tag product.get_image(254,185) %></div>
+        <div><%= product.name %></div>
+      <% end %>
+      <div><%= product.with_tax_price.to_s(:delimited)%></div>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="text-right">
+    <%= link_to products_path do %>
+      全ての商品を見る
+    <%end%>
+  </div>
+</div>
