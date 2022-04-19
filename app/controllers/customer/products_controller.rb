@@ -7,6 +7,8 @@ class Customer::ProductsController < ApplicationController
   end
 
   def index
+    @product_count = Product.count
+    @products = Product.page(params[:page])
   end
 
   def show
