@@ -12,6 +12,7 @@ class Customer::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @genres = Genre.all
   end
 
   private
