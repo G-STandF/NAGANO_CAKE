@@ -1,4 +1,3 @@
-
 <div>
   <p>
     ようこそながのCAKEへ！
@@ -13,11 +12,13 @@
   <h3>新着商品</h3>
   <div class="wrapper grid">
     <% @products.each do |product| %>
+    <% if product.is_sales == true %>
       <%= link_to product_path(product) do %>
         <div><%= image_tag product.get_image(254,185) %></div>
         <div><%= product.name %></div>
       <% end %>
       <div><%= product.with_tax_price.to_s(:delimited)%></div>
+    <% end %>
     <% end %>
   </div>
   <div class="text-right">
