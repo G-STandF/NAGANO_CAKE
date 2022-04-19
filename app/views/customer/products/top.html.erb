@@ -11,13 +11,18 @@
 <!-- product preview -->
 <div>
   <h3>新着商品</h3>
-  <div class = "d-flex p-2 bd-highlight">
+  <div class="wrapper grid">
     <% @products.each do |product| %>
       <%= link_to product_path(product) do %>
         <div><%= image_tag product.get_image(254,185) %></div>
         <div><%= product.name %></div>
       <% end %>
+      <div><%= product.with_tax_price.to_s(:delimited)%></div>
     <% end %>
   </div>
-
+  <div class="text-right">
+    <%= link_to products_path do %>
+      全ての商品を見る
+    <%end%>
+  </div>
 </div>
