@@ -14,9 +14,11 @@ class Customer::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @genres = Genre.all
+    @cart_item = CartItem.new
   end
 
   private
+  
   def cart_item_params
     params.require(:cart_items).permit(:product_id, :product_count)
   end
