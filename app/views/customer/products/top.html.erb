@@ -17,7 +17,7 @@
         <div><%= image_tag product.get_image(150,150) %></div>
         <div><%= product.name %></div>
       <% end %>
-      <div><%= product.with_tax_price.to_s(:delimited)%></div>
+      <div>¥<%= product.with_tax_price.to_s(:delimited)%>(税込価格)</div>
     <% end %>
     <% end %>
   </div>
