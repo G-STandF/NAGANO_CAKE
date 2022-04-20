@@ -16,6 +16,7 @@
         <p><%= @product.introduction %></p>
 
         <p>¥<%= @product.with_tax_price.to_s(:delimited) %>(税込価格)</p>
+        <%= render 'count_form', cart_item: @cart_item, product: @product %>
       </div>
       </div>
       </div>
