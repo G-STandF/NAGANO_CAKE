@@ -5,10 +5,17 @@ class Admin::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
     
   end
   
   def updated
     
+  end
+  
+  private
+  
+  def order_params
+    params.require(:order).permit(:payment_method)
   end
 end
