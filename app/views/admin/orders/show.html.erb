@@ -47,3 +47,54 @@
        </table>
      </div>
   </div>
+
+  <div class="row mt-4">
+    <div class="col-8">
+      <table class="table">
+        <thead class="table-active">
+          <tr class="bg-light">
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= order_item.item.add_tax_price.to_s(:delimited) %></td>
+            <td><%= order_item.amount %></td>
+            <td><%= order_item.subtotal.to_s(:delimited) %></td>
+           <%= form_with(model:[@order, order_item], url: admin_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true) do |f| %>
+            <td>
+              <%= f.select :product_status, OrderItem.product_statuses.keys %>
+              <%= f.submit "更新", class: "btn btn-success" %>
+            </td>
+           <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-4">
+      <table class="col-7 mt-auto offset-1">
+        <tr>
+          <td>商品合計</td>
+          <td class="text-right"><%= @order.total_price - @order.p.to_s(:delimited) %>円</td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td class="text-right"><%= @order.postage.to_s %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          　<td class="text-right"><strong><%= @order.total_price.to_s(:delimited) %>円</strong></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+</div>
