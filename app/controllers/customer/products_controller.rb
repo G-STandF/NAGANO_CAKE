@@ -7,9 +7,13 @@ class Customer::ProductsController < ApplicationController
   end
 
   def index
+    @products = Product.where(is_sales: true).page(params[:page])
+    @genres = Genre.all
   end
 
   def show
+    @product = Product.find(params[:id])
+    @genres = Genre.all
   end
 
   private

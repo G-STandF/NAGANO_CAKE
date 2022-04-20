@@ -1,2 +1,14 @@
-<h1>Customer::Products#index</h1>
-<p>Find me in app/views/customer/products/index.html.erb</p>
+<%= render 'genre', genres: @genres %>
+
+<h1>商品一覧(全<%= @products.count %>件)</h1>
+<% @products.each do |product| %>
+  <% if product.is_sales == true %>
+      <%= link_to product_path(product) do %>
+        <div><%= image_tag product.get_image(254,185) %></div>
+        <div><%= product.name %></div>
+      <% end %>
+      <div><%= product.with_tax_price.to_s(:delimited)%></div>
+  <%end%>
+<%end%>
+
+<%= paginate @products %>

@@ -1,0 +1,2 @@
+module Customer::GenreHelper
+end

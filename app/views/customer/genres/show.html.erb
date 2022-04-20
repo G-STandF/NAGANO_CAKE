@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-content-center">
+	  <div class="col-md-12">
+      <h2 class="text-center mt-2 mb-5" style="font-family: HiraMinPro-W6;"><%= @genre.name %>一覧(全<%= @products.count %>件)</h2>
+      <div class="row">
+      	<div class="col-md-2">
+          <%= render 'customer/products/genre', genres: @genres %>
+        </div>
+        <div class="col-md-10">
+        <div class="ganre-img">
+		      <% @products.each do |product| %>
+		        <% if product.is_sales == true %>
+		          <div style="padding-right: 0px; padding-left: 0px; margin: 10px 0;">
+		          <%= link_to product_path(product.id) , data: {"turbolinks" => false} do %>
+              <%= image_tag product.get_image(150, 150) %><br>
+              <%= product.name %><br>
+              ¥<%= product.with_tax_price.to_s(:delimited, delimiter: ',') %>
+		        <% end %>
+		      <% end %>
+		        </div>
+		      <% end %>
+		    </div>
+        </div>
+      </div>
+	  </div>
+  </div>
+</div>

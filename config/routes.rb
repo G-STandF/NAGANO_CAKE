@@ -26,6 +26,7 @@ Rails.application.routes.draw do
    patch "/customers/out" => "customers#out" #退会フラグを切り替える
    # post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
    resources :products, only: [:index,:show]
+   resources :genres, only: [:show]
    resources :customers, only: [:edit,:update]
    resources :cart_items, only: [:index,:update,:destroy,:create] do
     collection do #:idをつけないように!!
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
     end
    end
    resources :orders, only: [:index,:show,:new,:create] do
+
     collection do
      get :thanks
      get :confirm
