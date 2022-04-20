@@ -14,7 +14,7 @@
     <% @products.each do |product| %>
     <% if product.is_sales == true %>
       <%= link_to product_path(product) do %>
-        <div><%= image_tag product.get_image(254,185) %></div>
+        <div><%= image_tag product.get_image(150,150) %></div>
         <div><%= product.name %></div>
       <% end %>
       <div><%= product.with_tax_price.to_s(:delimited)%></div>
