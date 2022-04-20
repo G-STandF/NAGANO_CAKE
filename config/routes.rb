@@ -24,8 +24,7 @@ Rails.application.routes.draw do
    get "/customers/my_page" => "customers#show" #会員情報詳細ページ（マイページ）表示
    get "/customers/confirm" => "customers#confirm" #退会確認画面の表示
    patch "/customers/out" => "customers#out" #退会フラグを切り替える
-   get "/orders/thanks" => "orders#thanks" #注文完了画面を表示する
-   post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
+   # post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
    resources :products, only: [:index,:show]
    resources :customers, only: [:edit,:update]
    resources :cart_items, only: [:index,:update,:destroy,:create] do
@@ -33,9 +32,10 @@ Rails.application.routes.draw do
      delete :destroy_all #カートを空にする
     end
    end
-   resources :orders, only: [:index,:show,:new,:create,] do
+   resources :orders, only: [:index,:show,:new,:create] do
     collection do
      get :thanks
+     get :confirm
     end
    end
    resources :addresses, only: [:index,:create,:destroy,:edit,:update]
