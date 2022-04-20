@@ -34,3 +34,13 @@ namespace :admin do
    collection do #:idをつけないように!!
     delete :destroy_all #カートを空にする
    end
+end
+  resources :orders, only: [:index,:show,:new,:create,] do
+   collection do
+    get :thanks
+   end
+  end
+  resources :addresses, only: [:index,:create,:destroy,:edit,:update]
+ end
+# ここまで↑↑ 会員
+end
