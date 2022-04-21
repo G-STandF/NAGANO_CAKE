@@ -3,22 +3,22 @@
     <h4 class="bg-light my-4 text-center">注文情報入力</h4>
   </div>
 
-  <%= form_with model: @order, url: confirm_orders_path, method: :post, local: true do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, method: :post, local: true do |f| %>
     <h4>支払方法</h4>
     <div class="form-group row">
       <div class="col-md-6 ml-5">
         <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
-        <%= f.label :payment_method, "クレジットカード" %></br>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %></br>
 
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-        <%= f.label :payment_method, "銀行振込" %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
       </div>
     </div>
 
     <h4>お届け先</h4>
     <div class="form-group row">
       <div class="col-md-6 ml-5">
-        <%= f.radio_button :address_option, "0" %>
+        <%= f.radio_button :address_option, 0, checked: true %>
         <%= f.label :address_option, "ご自身の住所" %>
       </div>
       <div class="col-md-8 ml-5">
@@ -29,7 +29,7 @@
 
     <div class="form-group row">
       <div class="col-md-6 ml-5">
-        <%= f.radio_button :address_option, "1" %>
+        <%= f.radio_button :address_option, 1 %>
         <%= f.label :address_option, "登録済住所から選択" %>
       </div>
       <div class="col-md-8 ml-5">
@@ -41,16 +41,16 @@
 
     <div class="form-group row">
       <div class="col-md-6 ml-5">
-        <%= f.radio_button :address_option, "2" %>
+        <%= f.radio_button :address_option, 2 %>
         <%= f.label :address_option, "新しいお届け先" %>
       </div>
     </div>
 
 
     <div class="row ml-5">
-      <%= f.label :post_code, "郵便番号（ハイフンなし）" , class: "col-3 col-form-label " %>
+      <%= f.label :postal_code, "郵便番号（ハイフンなし）" , class: "col-3 col-form-label " %>
       <div class="col-3">
-        <%= f.text_field :post_code, class: "form-control form-control-sm"  %>
+        <%= f.text_field :postal_code, class: "form-control form-control-sm"  %>
       </div>
     </div>
 
@@ -73,6 +73,6 @@
         <%= f.submit "確認画面へ進む", class: "btn btn-primary " %>
       </div>
     </div>
+  <% end %>
 </div>
 
-<% end %>
