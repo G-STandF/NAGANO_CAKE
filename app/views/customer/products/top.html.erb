@@ -6,22 +6,27 @@
     <div class="col-10">
       <section class="main-visual mt-4">
         <div class="mv-text">
-          <h3 class=text-center>ようこそながのCAKEへ！</h3>
-          <p class=text-center>
-            このサイトは、ケーキ販売のECサイトになります。<br />
-            会員でない方も商品の閲覧はできますが、<br />
-            購入には会員登録が必要になります。
-          </p>
+          <div class="card">
+            <%= image_tag "cake-4910417_1280.jpeg", size: '200x500', class: "card-img" %>
+            <div class="card-img-overlay">
+              <h2 class="text-center"><strong>ようこそ、ながのCAKEへ！</strong></h2>
+              <p class="text-center text-secondary">
+                このサイトは、ケーキ販売のECサイトになります。<br />
+                会員でない方も商品の閲覧はできますが、<br />
+                購入には会員登録が必要になります。
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- product preview -->
       <div class="pv">
-        <h3 class="bg-light px-2 text-center">新着商品</h3>
+        <h3 class="bg-light mt-5 text-center">新着商品</h3>
         <div class="d-flex justify-content-center flex-row flex-wrap mt-3">
           <% @products.each do |product| %>
             <% if product.is_sales == true %>
-              <div class="card">
+              <div class="card m-1">
                 <%= link_to product_path(product), class: "text-dark" do %>
                   <div class="card-img-top"><%= image_tag product.get_image(150,150) %></div>
                   <div class="card-title lead"><%= product.name %></div>
@@ -34,7 +39,7 @@
         <div class="text-right">
           <%= link_to products_path do %>
             ＞全ての商品を見る
-          <%end%>
+          <% end %>
         </div>
       </div>
     </div>
