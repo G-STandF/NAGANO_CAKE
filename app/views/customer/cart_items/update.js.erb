@@ -1,0 +1,3 @@
+$("#subtotal").html("<%= j(render 'subtotal', cart_item: @cart_item) %>");
+$("#count_form").html("<%= j(render 'count_form', cart_item: @cart_item ) %>");
+$("#ttotal").html("<%= j(render 'total', total: @total )%>");
