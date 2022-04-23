@@ -5,18 +5,18 @@
 
     <%= form_with model: @address do |f| %>
       <div class="row mt-4 form-group">
-        <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "col-md-3" %>
-        <%= f.text_field :postal_code, class: "offset-md-1" %>
+        <div class="col-3"><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></div>
+        <div class="col-3"><%= f.text_field :postal_code, class: "form-control" %></div>
       </div>
 
       <div class="row form-group">
-        <%= f.label :address, "住所", class: "col-md-3" %>
-        <%= f.text_area :address, class: "offset-md-1 col-4" %>
+        <div class="col-3"><%= f.label :address, "住所" %></div>
+        <div class="col-5"><%= f.text_area :address, class: "form-control" %></div>
       </div>
 
       <div class="row mb-5 form-group">
-          <%= f.label :name, "宛名", class: "col-md-3" %>
-          <%= f.text_field :name, class: "offset-md-1" %>
+          <div class="col-3"><%= f.label :name, "宛名" %></div>
+          <div class="col-3"><%= f.text_field :name, class: "form-control" %></div>
           <%= f.submit "新規登録", class: "btn btn-success offset-md-2 col-2" %>
       </div>
     <% end %>
