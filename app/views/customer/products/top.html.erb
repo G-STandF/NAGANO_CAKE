@@ -1,29 +1,45 @@
-<div>
-  <p>
-    ようこそながのCAKEへ！
-    <br>このサイトは、ケーキ販売のECサイトになります。
-    <br>会員でない方も商品の閲覧はできますが、
-    <br>購入には会員登録が必要になります。
-  </p>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="col-10">
+      <section class="main-visual mt-4">
+        <div class="mv-text">
+          <h3 class=text-center>ようこそながのCAKEへ！</h3>
+          <p class=text-center>
+            このサイトは、ケーキ販売のECサイトになります。<br />
+            会員でない方も商品の閲覧はできますが、<br />
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+      </section>
+
+      <!-- product preview -->
+      <div class="pv">
+        <h3 class="bg-light px-2 text-center">新着商品</h3>
+        <div class="d-flex justify-content-center flex-row flex-wrap mt-3">
+          <% @products.each do |product| %>
+            <% if product.is_sales == true %>
+              <div class="card">
+                <%= link_to product_path(product), class: "text-dark" do %>
+                  <div class="card-img-top"><%= image_tag product.get_image(150,150) %></div>
+                  <div class="card-title lead"><%= product.name %></div>
+                <% end %>
+                <div>￥<%= product.with_tax_price.to_s(:delimited)%></div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="text-right">
+          <%= link_to products_path do %>
+            ＞全ての商品を見る
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- product preview -->
-<div>
-  <h3>新着商品</h3>
-  <div class="wrapper grid">
-    <% @products.each do |product| %>
-    <% if product.is_sales == true %>
-      <%= link_to product_path(product) do %>
-        <div><%= image_tag product.get_image(150,150) %></div>
-        <div><%= product.name %></div>
-      <% end %>
-      <div><%= product.with_tax_price.to_s(:delimited)%></div>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="text-right">
-    <%= link_to products_path do %>
-      全ての商品を見る
-    <%end%>
-  </div>
-</div>
+
+

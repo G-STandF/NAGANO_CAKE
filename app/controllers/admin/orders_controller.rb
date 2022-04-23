@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def index
-    @orders = Order.page(params[:page]).per(10).order(id: "DESC")
+    @orders = Order.page(params[:page]).per(3).order(id: "DESC")
 
   end
 
