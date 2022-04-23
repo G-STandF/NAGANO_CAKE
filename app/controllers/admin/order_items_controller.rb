@@ -1,20 +1,21 @@
 class Admin::OrderItemsController < ApplicationController
-  def updated
-    @order = Order.find(params[:order_id])
-    @order_items = @order.order_items
+  def update
     @order_item = OrderItem.find(params[:id])
-
-    if order_item.update(order_item_params)
-      flash[:notice] = "製作ステータスを更新しました。"
+    @order = @order_item.order
+    @order_items = @order.order_items
+    if @order_item.update(order_item_params)
+      flash[:notice] = "製作ステータスを変更しました"
+      if params[:order_item][:product_status] == "in_production"
+        @order_item.order.order_status = "under_production"
+        @order.save
+      elsif @order.order_items.count == @order.order_items.where(product_status: "production_completed").count
+        @order.order_status = "preparing"
+        @order.save
+      end
+      redirect_to admin_order_path(@order_item.order)
+    else
+      render :show
     end
-
-    if order_items.where(product_status: "製作完了").count == order_items.count
-      order.update(order_status: "発送準備中")
-    elsif order_items.where(product_status: "製作中").count >= 1
-      order.update(order_status: "製作中")
-    end
-
-    redirect_to request.referer
   end
 
   private

@@ -19,17 +19,15 @@ class Customer::OrdersController < ApplicationController
       @order.address = @address.address
       @order.name = @address.name
     elsif params[:order][:address_option] == "2" #新しいお届け先の場合はアドレステーブルに保存まで
-      @address = Address.new
-      @address.customer_id = current_customer.id
-      @address.post_code = @order.post_code
-      @address.address = @order.address
-      @address.name = @order.name
-      if @address.save
-      else
-        flash.now[:alert] = "新しいお届け先を入力してください。"
-        @order = Order.new(order_params)
-        render :new
-      end
+      @order.postal_code = params[:order][:postal_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+      # if @address.save
+      # else
+      #   flash.now[:alert] = "新しいお届け先を入力してください。"
+      #   @order = Order.new(order_params)
+      #   render :new
+      # end
     else
       flash.now[:alert] = "配送先を選択してください。"
       render :new
@@ -56,7 +54,7 @@ class Customer::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders.all.page(params[:page]).per(5)
+    @orders = current_customer.orders.all.page(params[:page]).per(5).order(id: "DESC")
   end
 
   def show
