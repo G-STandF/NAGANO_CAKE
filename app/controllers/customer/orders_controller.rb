@@ -14,20 +14,24 @@ class Customer::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:address_option] == "1" #登録済住所の場合
-      @address = Address.find(params[:order][:address_id])
-      @order.postal_code = @address.postal_code
-      @order.address = @address.address
-      @order.name = @address.name
-    elsif params[:order][:address_option] == "2" #新しいお届け先の場合はアドレステーブルに保存まで
-      @order.postal_code = params[:order][:postal_code]
-      @order.address = params[:order][:address]
-      @order.name = params[:order][:name]
-      # if @address.save
-      # else
-      #   flash.now[:alert] = "新しいお届け先を入力してください。"
-      #   @order = Order.new(order_params)
-      #   render :new
-      # end
+      if params[:order][:address_id] == ""
+        flash.now[:alert] = "住所を選択して下さい。"
+        render :new
+      else
+        @address = Address.find(params[:order][:address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
+      end
+    elsif params[:order][:address_option] == "2" #新しいお届け先
+      if params[:order][:postal_code] == "" || params[:order][:address] == "" || params[:order][:name] == ""
+        flash.now[:alert] = "新しいお届け先を入力してください。"
+        render :new
+      else
+        @order.postal_code = params[:order][:postal_code]
+        @order.address = params[:order][:address]
+        @order.name = params[:order][:name]
+      end
     else
       flash.now[:alert] = "配送先を選択してください。"
       render :new
