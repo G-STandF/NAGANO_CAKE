@@ -4,6 +4,15 @@ class Customer::CustomersController < ApplicationController
 
   def confirm
   end
+  
+  def out
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    #ログアウト
+    reset_session
+    flash[:notice] = "退会しました"
+    redirect_to root_path
+  end
 
   def edit
     @customer = current_customer
@@ -18,6 +27,6 @@ class Customer::CustomersController < ApplicationController
   private
   
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_deleted)
   end
 end
