@@ -8,7 +8,7 @@ class Customer::CustomersController < ApplicationController
   def out
     @customer = current_customer
     @customer.update(is_deleted: true)
-    #ログアウト
+    #論理削除
     reset_session
     flash[:notice] = "退会しました"
     redirect_to root_path
@@ -21,6 +21,7 @@ class Customer::CustomersController < ApplicationController
   def update
     @customer = current_customer
     @customer.update(customer_params)
+    flash[:notice] = "会員情報を更新しました。"
     redirect_to customers_my_page_path
   end
   
