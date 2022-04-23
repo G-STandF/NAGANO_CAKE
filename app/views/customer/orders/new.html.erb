@@ -46,6 +46,17 @@
       </div>
     </div>
 
+    <!--<#% if @order.errors.any? %>-->
+    <!--  <div id = "error_explanation">-->
+    <!--    <h2><%#= @order.errors.count %> errors prohibited this book from being saved: </h2>-->
+    <!--    <ul>-->
+    <!--      <%# @order.errors.full_messages.each do |message| %>-->
+    <!--        <li><%#= message %></li>-->
+    <!--      <%# end %>-->
+    <!--    </ul>-->
+    <!-- </div>-->
+    <!--<#% end %>-->
+
 
     <div class="row ml-5">
       <%= f.label :postal_code, "郵便番号（ハイフンなし）" , class: "col-3 col-form-label " %>
@@ -61,17 +72,18 @@
       </div>
     </div>
 
-    <div class="row ml-5 mt-2">
-      <%= f.label :name, "宛名" , class: "col-3 col-form-label " %>
-      <div class="col-3">
-        <%= f.text_field :name , class: "form-control form-control-sm" %>
+      <div class="row ml-5 mt-2">
+        <%= f.label :name, "宛名" , class: "col-3 col-form-label " %>
+        <div class="col-3">
+          <%= f.text_field :name , class: "form-control form-control-sm" %>
+        </div>
       </div>
-    </div>
 
-    <div class="row mt-2 justify-content-center my-3">
+
+    <div class="row justify-content-center my-3">
       <div class="col-2 mx-3">
         <%= f.submit "確認画面へ進む", class: "btn btn-primary " %>
-      </div>
+    　　　　</div>
     </div>
   <% end %>
 </div>
