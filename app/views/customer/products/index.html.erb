@@ -1,2 +1,26 @@
-<h1>Customer::Products#index</h1>
-<p>Find me in app/views/customer/products/index.html.erb</p>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="col-10">
+      <h4 class="bg-light px-2">商品一覧(全<%= @products.count %>件)</h4>
+      <div class ="d-flex flex-row flex-wrap mt-3">
+        <% @products.each do |product| %>
+          <% if product.is_sales == true %>
+            <div class="card">
+              <%= link_to product_path(product), class: "text-dark" do %>
+                <div class="card-img-top"><%= image_tag product.get_image(200,200) %></div>
+                <div class="card-title lead"><h6 class="text-center"><%= product.name %></h6></div>
+              <% end %>
+              <div>￥<%= product.with_tax_price.to_s(:delimited)%></div>
+            </div>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= paginate @products %>
