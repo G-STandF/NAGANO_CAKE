@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2 class="m-5">会員一覧</h2>
+    <h3 class="m-5 bg-light">会員一覧</h3>
   </div>
   <div class="row mb-5">
     <table class="table table-border table-hover">
@@ -31,5 +31,6 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @customers %>
   </div>
 </div>
