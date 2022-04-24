@@ -25,7 +25,11 @@ Rails.application.routes.draw do
    get "/customers/confirm" => "customers#confirm" #退会確認画面の表示
    patch "/customers/out" => "customers#out" #退会フラグを切り替える
    # post "/orders/confirm" => "orders#confirm" #注文情報確認画面を表示する
-   resources :products, only: [:index,:show]
+   resources :products, only: [:index,:show] do
+    collection do
+     get 'search'
+    end
+   end
    resources :genres, only: [:show]
    resources :customers, only: [:edit,:update]
    resources :cart_items, only: [:index,:update,:destroy,:create] do
