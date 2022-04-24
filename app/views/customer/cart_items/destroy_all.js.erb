@@ -1,2 +1,3 @@
+$("#d-btn").html("<%= j(render "destroy_all") %>");
 $("#cart_table").html("<%= j(render 'index', cart_items: @cart_items)%>");
 $("#total").html("<%= j(render 'total', total: @total )%>");

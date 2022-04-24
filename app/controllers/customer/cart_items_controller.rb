@@ -27,17 +27,23 @@ class Customer::CartItemsController < ApplicationController
   def update
     @cart_item = CartItem.find(params[:id])
     @cart_item.update(cart_item_params)
+    @cart_items = current_customer.cart_items
+    @total = @cart_items.inject(0){|sum, product| sum + product.subtotal}
   end
 
   def destroy
     @cart_item = CartItem.find(params[:id]).destroy
-    redirect_to cart_items_path
+    @cart_items = current_customer.cart_items
+    @total = @cart_items.inject(0){|sum, product| sum + product.subtotal}
+
+    #redirect_to cart_items_path
   end
 
   def destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
-    redirect_to cart_items_path
+    @total = @cart_items.inject(0){|sum, product| sum + product.subtotal}
+    #redirect_to cart_items_path
   end
 
   private
