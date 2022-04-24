@@ -8,7 +8,7 @@
       <div class="d-flex justify-content-start flex-row flex-wrap mt-3">
         <% @products.each do |product| %>
           <% if product.is_sales == true %>
-            <div class="card">
+            <div class="card m-1">
             <%= link_to product_path(product.id), class: "text-dark" do %>
               <div class="card-img-top"><%= image_tag product.get_image(200, 200) %></div>
               <div class="card-title lead"><h6 class="text-center"><%= product.name %></h6></div>
