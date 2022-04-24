@@ -33,7 +33,7 @@
               <% end %>
             </li>
           <% elsif customer_signed_in? %>
-            <p class="text-white mr-2">ようこそ<%= current_customer.last_name %><%= current_customer.first_name %>さん！</p>
+            <p class="text-white mr-2 my-auto">ようこそ<%= current_customer.last_name %><%= current_customer.first_name %>さん！</p>
             <li class="nav-item">
               <%= link_to customers_my_page_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
                 <i class="fas fa-user-circle"></i> マイページ
