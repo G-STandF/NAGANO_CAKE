@@ -1,5 +1,5 @@
 <div class="container">
-
+  <span id="flash"></span> <!-- TODO: Flash message for jQuery -->
   <div class="row">
     <div class="col-3">
       <h5 class="text-center mt-5">注文履歴の詳細</h5>
@@ -37,11 +37,12 @@
          </tr>
          <tr>
            <th>注文ステータス</th>
-           <td>
-             <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
-               <%= f.select(:order_status, Order.order_statuses_i18n.invert, {selected: @order.order_status}) %>
-               <%= f.submit "更新", class: "btn btn-success" %>
-             <% end %>
+           <td class="order_status_select">
+             <%= render "order_status", order: @order %>
+             <%#= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+               <%#= f.select(:order_status, Order.order_statuses_i18n.invert, {selected: @order.order_status}) %>
+               <%#= f.submit "更新", class: "btn btn-success" %>
+             <%# end %>
            </td>
          </tr>
        </table>
@@ -62,17 +63,20 @@
         </thead>
         <tbody>
           <% @order_items.each do |order_item| %>
-            <tr>
+            <tr id="order_item_<%= order_item.id %>">
               <td><%= order_item.product.name %></td>
               <td><%= order_item.product.with_tax_price.to_s(:delimited) %></td>
               <td><%= order_item.product_count %></td>
               <td><%= order_item.subtotal.to_s(:delimited) %></td>
-             <%= form_with(model:[@order, order_item], url: admin_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true) do |f| %>
-                <td>
-                  <%= f.select(:product_status, OrderItem.product_statuses_i18n.invert, {selected: order_item.product_status}) %>
-                  <%= f.submit "更新", class: "btn btn-success" %>
-                </td>
-             <% end %>
+              <td class="product_status_select">
+                <%= render "admin/order_items/product_status", order: @order, order_item: order_item %>
+              </td>
+              <!--<%#= form_with(model:[@order, order_item], url: admin_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true) do |f| %>-->
+              <!--  <td>-->
+              <!--    <%#= f.select(:product_status, OrderItem.product_statuses_i18n.invert, {selected: order_item.product_status}) %>-->
+              <!--    <%#= f.submit "更新", class: "btn btn-success" %>-->
+              <!--  </td>-->
+              <!--<%# end %>-->
             </tr>
           <% end %>
         </tbody>
