@@ -1,0 +1,3 @@
+$(".order_status_select").html("<%= j(render 'admin/orders/order_status', order: @order) %>");
+$("#order_item_<%= @order_item.id %> .product_status_select").html("<%= j(render 'admin/order_items/product_status', order: @order, order_item: @order_item) %>");
+$('#flash').html('<strong><%= @message %></strong>')
