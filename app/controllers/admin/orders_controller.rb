@@ -13,7 +13,7 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order_items = @order.order_items
-    @order_item = OrderItem.find(params[:id])
+    # @order_item = OrderItem.find(params[:id])
    if @order.update(order_params)
      @message = "注文ステータスを更新しました。"
      if @order.order_status == "paid_up"
