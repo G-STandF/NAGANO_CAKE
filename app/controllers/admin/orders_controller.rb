@@ -3,7 +3,6 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @orders = Order.page(params[:page]).per(8).order(id: "DESC")
-
   end
 
   def show
@@ -28,6 +27,11 @@ class Admin::OrdersController < ApplicationController
    else
       render :show
    end
+  end
+
+  def customer_index
+    @customer = Customer.find(params[:id])
+    @orders = @customer.orders.page(params[:page]).per(8).order(id: "DESC")
   end
 
   private
