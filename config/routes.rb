@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   namespace :admin do
    resources :genres, only: [:index, :create, :edit, :update]
    resources :products, only: [:new, :index, :create, :show, :edit, :update]
-   resources :orders, only: [:show, :update, :index]
+   resources :orders, only: [:show, :update, :index] do
+    member do
+     get :customer_index
+    end
+   end
    resources :order_items, only: [:update]
    resources :customers, only: [:index, :show, :edit, :update]
   end
@@ -34,7 +38,6 @@ Rails.application.routes.draw do
     end
    end
    resources :orders, only: [:index,:show,:new,:create] do
-
     collection do
      get :thanks
      post :confirm

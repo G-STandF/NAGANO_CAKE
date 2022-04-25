@@ -5,7 +5,7 @@
 
   <div class="row justify-content-center">
     <div class="col-md-10">
-
+      
       <div class="row justify-content-end">
         <%= link_to new_admin_product_path, class: "btn pull-right new_product" do %>
           <i class="fal fa-plus-circle"></i>
@@ -22,7 +22,7 @@
             <th>ステータス</th>
           </tr>
         </thead>
-        <% @products.each do |product| %>
+        <% @search_products.each do |product| %>
         <tbody>
           <tr>
             <td><%= product.id %></td>
@@ -34,16 +34,16 @@
             <td>
               <% if product.is_sales == true %>
                 <p class="text-success fw-bold">販売中</p>
-              <%else%>
+              <% else %>
               　<p class="text-secondary fw-bold">販売停止中</p>
-              <%end%>
+              <% end %>
             </td>
           </tr>
         </tbody>
-        <%end%>
+        <% end %>
       </table>
     </div>
   </div>
-  <div class="text-center"><%= paginate @products %></div>
+  <%= paginate @products %>
 </div>
 

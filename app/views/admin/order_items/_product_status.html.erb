@@ -1,0 +1,4 @@
+<%= form_with(model:[order, order_item], url: admin_order_item_path(order_id: order.id, id: order_item.id), method: :patch, local: false) do |f| %>
+    <%= f.select(:product_status, OrderItem.product_statuses_i18n.invert, {selected: order_item.product_status}) %>
+    <%= f.submit "更新", class: "btn btn-success" %>
+<% end %>
