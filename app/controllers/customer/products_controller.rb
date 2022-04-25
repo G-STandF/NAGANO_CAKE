@@ -1,6 +1,6 @@
 class Customer::ProductsController < ApplicationController
   def top
-    @products = Product.all.order(cerate_at: :desc).limit(4)
+    @products = Product.all.order(created_at: :desc).limit(4)
     @genres = Genre.all
   end
 
