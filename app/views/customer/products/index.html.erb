@@ -6,7 +6,7 @@
     <div class="col-10">
       <h4 class="px-2">商品一覧(全<%= @products.count %>件)</h4>
       <div class ="d-flex justify-content-sta flex-row flex-wrap mt-3">
-        <% @products.each do |product| %>
+        <% @search_products.each do |product| %>
           <% if product.is_sales == true %>
             <div class="card m-1">
               <%= link_to product_path(product), class: "text-dark" do %>
@@ -15,8 +15,8 @@
               <% end %>
               <div>￥<%= product.with_tax_price.to_s(:delimited)%></div>
             </div>
-          <%end%>
-        <%end%>
+          <% end %>
+        <% end%>
       </div>
     </div>
   </div>

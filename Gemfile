@@ -64,3 +64,5 @@ gem 'jquery-rails'
 gem 'enum_help'
 
 gem 'image_processing', '~> 1.2'
+
+gem 'ransack'
