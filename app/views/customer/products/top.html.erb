@@ -1,2 +1,50 @@
-<h1>Customer::Products#top</h1>
-<p>Find me in app/views/customer/products/top.html.erb</p>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="col-10">
+      <section class="main-visual mt-4">
+        <div class="mv-text">
+          <div class="card">
+            <%= image_tag "cake-4910417_1280.jpeg", size: '500x500', class: "card-img" %>
+            <div class="card-img-overlay">
+              <h2 class="text-right"><strong>ようこそ、ながのCAKEへ!!</strong></h2>
+              <p class="text-right text-secondary">
+                このサイトは、ケーキ販売のECサイトになります。<br />
+                会員でない方も商品の閲覧はできますが、<br />
+                購入には会員登録が必要になります。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- product preview -->
+      <div class="pv">
+        <h3 class="bg-light mt-5 text-center">新着商品</h3>
+        <div class="d-flex justify-content-center flex-row flex-wrap mt-3">
+          <% @products.each do |product| %>
+            <% if product.is_sales == true %>
+              <div class="card m-1">
+                <%= link_to product_path(product), class: "text-dark" do %>
+                  <div class="card-img-top"><%= image_tag product.get_image(150,150) %></div>
+                  <div class="card-title lead"><%= product.name %></div>
+                <% end %>
+                <div>￥<%= product.with_tax_price.to_s(:delimited)%></div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="text-right">
+          <%= link_to products_path do %>
+            ＞全ての商品を見る
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

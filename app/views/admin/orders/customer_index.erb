@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <h3 class="bg-light my-5"><strong><%= @customer.last_name %><%= @customer.first_name %></strong>さんの<strong>注文履歴</strong></h3>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr  class="bg-light">
+          <th>購入日時</th>
+          <th>注文個数</th>
+          <th>注文ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+       <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.created_at.strftime("%Y-%m-%d %H:%M:%S") ,admin_order_path(order) %></td>
+          <td><%= order.order_items.sum(:product_count) %></td>
+          <td><%= order.order_status_i18n %></td>
+        </tr>
+       <% end %>
+      </tbody>
+    </table>
+    <%= paginate @orders %>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <%= image_tag 'nagano-cake (1).png', size: "160x100" %>
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
+            <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to admin_products_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-list"></i> 商品一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_customers_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-users"></i> 会員一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_orders_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-history"></i> 注文履歴一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_genres_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-layer-group"></i> ジャンル一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              <% end %>
+            </li>
+            <div>
+              <%= search_form_for @search, url: admin_products_path, class: "form-inline" do |f| %>
+                <%= f.text_field :name_cont, class: "form-control mx-1", placeholder: "商品を検索" %>
+                <%= f.submit "検索", class: "btn btn-outline-success" %>
+              <% end %>
+            </div>
+          <% elsif customer_signed_in? %>
+            <p class="text-white mr-2 my-auto text-nowrap"><small>ようこそ</small><%= current_customer.last_name %><%= current_customer.first_name %><small>さん！</small></p>
+            <li class="nav-item">
+              <%= link_to customers_my_page_path, class: "nav-link text-light text-nowrap btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-user-circle"></i> マイページ
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to products_path, class: "nav-link text-light text-nowrap btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-list"></i> 商品一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to cart_items_path, class: "nav-link text-light text-nowrap btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-shopping-cart"></i> カート
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-light text-nowrap btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              <% end %>
+            </li>
+            <div>
+              <%= search_form_for @search, url: products_path, class: "form-inline" do |f| %>
+                <%= f.text_field :name_cont, class: "form-control mx-1 text-nowrap", placeholder: "商品を検索" %>
+                <%= f.submit "検索", class: "btn btn-outline-success text-nowrap" %>
+              <% end %>
+            </div>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to about_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-link"></i> About
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to products_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-list"></i> 商品一覧
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_registration_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-user-plus"></i> 新規登録
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_session_path, class: "nav-link text-light btn btn-primary mr-1 mb-1" do %>
+                <i class="fas fa-sign-in-alt"></i> ログイン
+              <% end %>
+            </li>
+            <div>
+              <%= search_form_for @search, url: products_path, class: "form-inline" do |f| %>
+                <%= f.text_field :name_cont, class: "form-control mx-1", placeholder: "商品を検索" %>
+                <%= f.submit "検索", class: "btn btn-outline-success" %>
+              <% end %>
+            </div>
+          <% end %>
+        </ul>
+        <!--<div>-->
+          <%#= search_form_for @search, url: products_path do |f| %>
+            <%#= f.text_field :name_cont %>
+            <%#= f.submit "検索" %>
+          <%# end %>
+          <!--<form class="d-flex">-->
+          <!--  <input class="form-control mr-2 mb-1" type="search" placeholder="Search" aria-label="Search">-->
+          <!--  <button class="btn btn-outline-success mb-1" type="submit">Search</button>-->
+          <!--</form>-->
+        </div>
+      </div>
+    </div>
+  </nav>

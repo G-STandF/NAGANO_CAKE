@@ -1,2 +1,51 @@
-<h1>Customer::Customers#show</h1>
-<p>Find me in app/views/customer/customers/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h3 class="m-3 bg-light">マイページ</h3>
+  </div>
+  <div class="row my-2">
+    <div class="mr-3"><h4>登録情報</h4></div>
+    <div>
+      <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success ml-3" %>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-border">
+      <tr>
+        <td>氏名</td>
+        <td><%= current_customer.last_name %> <%= current_customer.first_name %></td>
+      </tr>
+      <tr>
+        <td>カナ</td>
+        <td><%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <td>郵便番号</td>
+        <td><%= current_customer.postal_code %></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td><%= current_customer.address %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= current_customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= current_customer.email %></td>
+      </tr>
+    </table>
+  </div>
+    <div class="row my-3">
+      <div class="mr-2 col-2"><h4>配送先</h4></div>
+      <div>
+        <%= link_to "一覧を見る", addresses_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="mr-2 col-2"><h4>注文履歴</h4></div>
+      <div>
+        <%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+</div>

@@ -6,11 +6,28 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+    <main>
+      <%= flash[:notice] %>
+      <%= flash[:alert] %>
+      <%= yield %>
+    </main>
+    <footer>
+      <div class="py-4 bg-dark text-center">
+        <div class="container">
+          <i class="fab fa-twitter text-white-50"></i>
+          <i class="fab fa-instagram text-white-50"></i>
+          <i class="fab fa-facebook text-white-50"></i>
+          <p class="text-white small">&copy; 2022 G-STandF</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
