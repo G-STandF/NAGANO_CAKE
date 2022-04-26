@@ -31,7 +31,7 @@
     <div class="genre field row">
       <div class="col-2"><%= f.label :genre_id,"ジャンル" %></div>
       <div class="col-6">
-        <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), class: "mb-2", include_blank: "選択して下さい" %>
+        <%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "--選択してください--"}, {class: "form-control mb-2"}) %>
       </div>
     </div>
 
