@@ -9,7 +9,7 @@
       <div class="col-6">
         <div class="custom-file mb-2">
           <%= f.file_field :image, class: "custom-file-input", id: "inputGroupFile04" %>
-          <label class="custom-file-label" for="inputGroupFile04">ファイルを選んでください</label>
+          <label class="custom-file-label" for="inputGroupFile04">ファイルを追加する</label>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
     <div class="genre field row">
       <div class="col-2"><%= f.label :genre_id,"ジャンル" %></div>
       <div class="col-6">
-        <%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "--選択してください--"}, {class: "form-control mb-2"}) %>
+        <%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "ジャンルを選択してください"}, {class: "form-control mb-2"}) %>
       </div>
     </div>
 
